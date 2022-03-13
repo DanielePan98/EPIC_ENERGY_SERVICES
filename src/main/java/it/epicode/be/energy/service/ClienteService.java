@@ -24,8 +24,8 @@ public class ClienteService {
 		return clienteRepository.findAll(pageable);
 	}
 
-	public Page<Cliente> findAllByOrderBySedeLegaleComuneProvinciaSigla(Pageable pageable) {
-		return clienteRepository.findAllByOrderBySedeLegaleComuneProvinciaSigla(pageable);
+	public Page<Cliente> findAllByOrderBySedeLegaleComuneProvinciaNome(Pageable pageable) {
+		return clienteRepository.findAllByOrderBySedeLegaleComuneProvinciaNome(pageable);
 	}
 
 	public Page<Cliente> findAllByOrderByFatturatoAnnuale(Pageable pageable) {
@@ -54,8 +54,8 @@ public class ClienteService {
 		return clienteRepository.findByDataUltimoContatto(data, pageable);
 	}
 
-	public Page<Cliente> findByNomeContattoContainingIgnoreCase(String nome, Pageable pageable) {
-		return clienteRepository.findByNomeContattoContainingIgnoreCase(nome, pageable);
+	public Page<Cliente> findByRagioneSociale(String nome, Pageable pageable) {
+		return clienteRepository.findByRagioneSocialeContainingIgnoreCase(nome, pageable);
 	}
 
 //Altri metodi CRUD

@@ -9,9 +9,11 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
+@NoArgsConstructor
 public class Provincia {
 	
 	@Id
@@ -22,5 +24,12 @@ public class Provincia {
 	private String regione;
 	@OneToMany(mappedBy = "provincia")
 	private List<Comune> comuni;
+	
+	public Provincia(String sigla,String nome,String regione) {
+		this.nome = nome;
+		this.sigla = sigla;
+		this.regione = regione;
+	}
 
+	
 }

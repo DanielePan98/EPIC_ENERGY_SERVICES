@@ -24,5 +24,12 @@ public class Comune {
 	private Provincia provincia;
 	@OneToMany(mappedBy = "comune")
 	private List<Indirizzo> indirizzi;
+	
+	public Comune(String nomeComune, String nomeProvincia) {
+		this.nomeComune = nomeComune;
+		this.nomeProvincia = nomeProvincia;
+	}
+	
+	
 
 }
