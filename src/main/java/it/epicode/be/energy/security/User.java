@@ -1,4 +1,4 @@
-package it.catalogolibri.model;
+package it.epicode.be.energy.security;
 
 import java.util.HashSet;
 import java.util.Set;

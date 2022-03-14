@@ -16,8 +16,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import it.catalogolibri.service.UserDetailsServiceImpl;
-import it.catalogolibri.util.AuthTokenFilter;
+import it.epicode.be.energy.security.UserDetailsServiceImpl;
+import it.epicode.be.energy.util.AuthTokenFilter;
 
 @Configuration
 @EnableWebSecurity

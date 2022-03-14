@@ -20,18 +20,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.Operation;
-import it.catalogolibri.exception.CatalogoException;
-import it.catalogolibri.model.LoginRequest;
-import it.catalogolibri.model.LoginResponse;
-import it.catalogolibri.model.RequestRegisterUser;
-import it.catalogolibri.model.Role;
-import it.catalogolibri.model.Roles;
-import it.catalogolibri.model.User;
-import it.catalogolibri.repository.RoleRepository;
-import it.catalogolibri.repository.UserRepository;
-import it.catalogolibri.service.UserDetailsImpl;
-import it.catalogolibri.service.UserService;
-import it.catalogolibri.util.JwtUtils;
+import it.epicode.be.energy.exception.EnergyException;
+import it.epicode.be.energy.security.LoginRequest;
+import it.epicode.be.energy.security.LoginResponse;
+import it.epicode.be.energy.security.RequestRegisterUser;
+import it.epicode.be.energy.security.Role;
+import it.epicode.be.energy.security.RoleRepository;
+import it.epicode.be.energy.security.Roles;
+import it.epicode.be.energy.security.User;
+import it.epicode.be.energy.security.UserDetailsImpl;
+import it.epicode.be.energy.security.UserRepository;
+import it.epicode.be.energy.security.UserService;
+import it.epicode.be.energy.util.JwtUtils;
 
 @RestController
 @RequestMapping("/auth")
@@ -105,7 +105,7 @@ public class AuthController {
                     ruoli.add(ruoloB.get());
                     break;
                 default:
-                    throw new CatalogoException("Ruolo non trovato!");
+                    throw new EnergyException("Ruolo non trovato!");
 
                 }
 

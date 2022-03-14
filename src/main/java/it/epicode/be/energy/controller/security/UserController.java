@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import it.catalogolibri.model.User;
-import it.catalogolibri.service.UserService;
+import it.epicode.be.energy.security.User;
+import it.epicode.be.energy.security.UserService;
 
 @RestController
 @RequestMapping("/api")
