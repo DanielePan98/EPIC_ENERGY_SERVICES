@@ -29,6 +29,8 @@ public class User {
 	private String password;
 	@Column(unique = true,nullable=false)
 	private String email;
+	private String nome;
+	private String cognome;
 	private boolean isActive;
 	
 	@ManyToMany

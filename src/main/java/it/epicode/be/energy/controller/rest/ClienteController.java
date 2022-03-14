@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,10 +18,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import it.epicode.be.energy.model.Cliente;
 import it.epicode.be.energy.service.ClienteService;
 
 @RestController
+@SecurityRequirement(name="bearerAuth")
 @RequestMapping("/api")
 public class ClienteController {
 
@@ -118,12 +121,14 @@ public class ClienteController {
 	}
 
 	@PostMapping(path = "/cliente/aggiungiCliente")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<Cliente> save(@RequestBody Cliente cliente) {
 		Cliente save = clienteService.save(cliente);
 		return new ResponseEntity<>(save, HttpStatus.CREATED);
 	}
 
 	@PutMapping(path = "/cliente/aggiornaCliente/{id}")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<Cliente> update(@PathVariable Long id, @RequestBody Cliente cliente) {
 		Cliente save = clienteService.update(cliente, id);
 		return new ResponseEntity<>(save, HttpStatus.OK);
@@ -131,6 +136,7 @@ public class ClienteController {
 	}
 
 	@DeleteMapping(path = "/cliente/eliminaCliente/{id}")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<String> delete(@PathVariable Long id) {
 		clienteService.delete(id);
 		return new ResponseEntity<>("Cliente eliminato!", HttpStatus.OK);

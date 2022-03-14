@@ -1,4 +1,4 @@
-package it.epicode.be.energy.util;
+package it.epicode.be.energy.util.security;
 
 import java.util.Date;
 

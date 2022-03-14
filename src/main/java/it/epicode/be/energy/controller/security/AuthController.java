@@ -31,7 +31,7 @@ import it.epicode.be.energy.security.User;
 import it.epicode.be.energy.security.UserDetailsImpl;
 import it.epicode.be.energy.security.UserRepository;
 import it.epicode.be.energy.security.UserService;
-import it.epicode.be.energy.util.JwtUtils;
+import it.epicode.be.energy.util.security.JwtUtils;
 
 @RestController
 @RequestMapping("/auth")
@@ -87,6 +87,8 @@ public class AuthController {
         userRegistrato.setUserName(registraUser.getUserName());
         userRegistrato.setEmail(registraUser.getEmail());
         userRegistrato.setPassword(encoder.encode(registraUser.getPassword()));
+        userRegistrato.setNome(registraUser.getNome());
+        userRegistrato.setCognome(registraUser.getCognome());
         if (registraUser.getRoles().isEmpty()) {
             Optional<Role> ruolo = roleRepository.findByRoleName(Roles.ROLE_USER);
             Set<Role> ruoli = new HashSet<>();
