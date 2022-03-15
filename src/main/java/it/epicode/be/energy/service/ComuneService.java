@@ -20,6 +20,10 @@ public class ComuneService {
 		return comuneRepository.findById(id);
 	}
 	
+	public Page<Comune> findByNomeComune(String nome,Pageable pageable) {
+		return comuneRepository.findByNomeComuneContainingIgnoreCase(nome,pageable);
+	}
+	
 	public Page<Comune> findAll(Pageable pageable) {
 		return comuneRepository.findAll(pageable);
 	}

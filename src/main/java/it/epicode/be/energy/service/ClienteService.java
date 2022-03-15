@@ -42,8 +42,8 @@ public class ClienteService {
 
 //Tutti i metodi findBy riguardanti il filtro
 
-	public Page<Cliente> findByFatturatoAnnuale(Long fatturato, Pageable pageable) {
-		return clienteRepository.findByFatturatoAnnuale(fatturato, pageable);
+	public Page<Cliente> findByFatturatoAnnuale(Long fatturato1,Long fatturato2, Pageable pageable) {
+		return clienteRepository.findByFatturatoAnnualeBetween(fatturato1, fatturato2, pageable);
 	}
 
 	public Page<Cliente> findByDataInserimento(LocalDate data, Pageable pageable) {

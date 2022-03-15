@@ -2,6 +2,7 @@ package it.epicode.be.energy.util;
 
 import java.io.FileReader;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,14 +61,15 @@ public class DataLoadRunner implements CommandLineRunner {
 		try (CSVReader csvReader = new CSVReader(new FileReader("comuni-italiani.csv"));) {
 			String[] values = null;
 			csvReader.readNext();
-			Provincia provincia;
+			Optional<Provincia> provincia;
 			Comune comune;
 			while ((values = csvReader.readNext()) != null) {
-				comune = new Comune(values[2], values[3]);
-				provincia = new Provincia();
-				provincia.setId(Long.valueOf(values[0]));
-				comune.setProvincia(provincia);
-				comuneRepository.save(comune);
+				provincia=provinciaRepository.findByNomeIgnoreCase(values[3]);
+				if(provincia.isPresent()) {
+					comune = new Comune(values[2], values[3]);
+					comune.setProvincia(provincia.get());
+					comuneRepository.save(comune);
+				}			
 			}
 		}
 	}

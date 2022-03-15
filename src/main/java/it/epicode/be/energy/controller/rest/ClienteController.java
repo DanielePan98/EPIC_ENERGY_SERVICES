@@ -30,7 +30,7 @@ public class ClienteController {
 	@Autowired
 	ClienteService clienteService;
 
-	@GetMapping(path = "/cliente/listaClienti")
+	@GetMapping(path = "/cliente/lista")
 	public ResponseEntity<Page<Cliente>> findAll(Pageable pageable) {
 		Page<Cliente> findAll = clienteService.findAll(pageable);
 		if (!findAll.isEmpty()) {
@@ -80,9 +80,9 @@ public class ClienteController {
 		}
 	}
 
-	@GetMapping(path = "/cliente/filtrataPerFatturatoAnnuale/{fatturato}")
-	public ResponseEntity<Page<Cliente>> findByFatturatoAnnuale(@PathVariable Long fatturato, Pageable pageable) {
-		Page<Cliente> find = clienteService.findByFatturatoAnnuale(fatturato, pageable);
+	@GetMapping(path = "/cliente/filtrataPerFatturatoAnnuale/{fatturato1}/{fatturato2}")
+	public ResponseEntity<Page<Cliente>> findByFatturatoAnnuale(@PathVariable Long fatturato1,@PathVariable Long fatturato2, Pageable pageable) {
+		Page<Cliente> find = clienteService.findByFatturatoAnnuale(fatturato1,fatturato2, pageable);
 		if (find.hasContent()) {
 			return new ResponseEntity<>(find, HttpStatus.OK);
 		} else {
@@ -120,14 +120,14 @@ public class ClienteController {
 		}
 	}
 
-	@PostMapping(path = "/cliente/aggiungiCliente")
+	@PostMapping(path = "/cliente/aggiungi")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<Cliente> save(@RequestBody Cliente cliente) {
 		Cliente save = clienteService.save(cliente);
 		return new ResponseEntity<>(save, HttpStatus.CREATED);
 	}
 
-	@PutMapping(path = "/cliente/aggiornaCliente/{id}")
+	@PutMapping(path = "/cliente/aggiorna/{id}")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<Cliente> update(@PathVariable Long id, @RequestBody Cliente cliente) {
 		Cliente save = clienteService.update(cliente, id);
@@ -135,7 +135,7 @@ public class ClienteController {
 
 	}
 
-	@DeleteMapping(path = "/cliente/eliminaCliente/{id}")
+	@DeleteMapping(path = "/cliente/elimina/{id}")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<String> delete(@PathVariable Long id) {
 		clienteService.delete(id);

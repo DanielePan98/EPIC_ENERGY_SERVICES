@@ -8,6 +8,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -23,6 +28,7 @@ public class Provincia {
 	private String sigla;
 	private String regione;
 	@OneToMany(mappedBy = "provincia")
+	@JsonIgnoreProperties({"nomeProvincia","provincia","indirizzi"})
 	private List<Comune> comuni;
 	
 	public Provincia(String sigla,String nome,String regione) {

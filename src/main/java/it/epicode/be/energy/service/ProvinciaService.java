@@ -16,6 +16,10 @@ public class ProvinciaService {
 	@Autowired
 	ProvinciaRepository provinciaRepository;
 	
+	public Optional<Provincia> findByNome(String nome) {
+		return provinciaRepository.findByNomeIgnoreCase(nome);
+	}
+	
 	public Optional<Provincia> findById(Long id) {
 		return provinciaRepository.findById(id);
 	}

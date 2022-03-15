@@ -10,7 +10,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import it.epicode.be.energy.exception.EnergyException;
+import it.epicode.be.energy.model.Cliente;
 import it.epicode.be.energy.model.Fattura;
+import it.epicode.be.energy.repository.ClienteRepository;
 import it.epicode.be.energy.repository.FatturaRepository;
 
 @Service
@@ -18,13 +20,15 @@ public class FatturaService {
 
 	@Autowired
 	FatturaRepository fatturaRepository;
+	@Autowired
+	ClienteRepository clienteRepository;
 
 	public Page<Fattura> findByClienteId(Long id, Pageable pageable) {
 		return fatturaRepository.findByClienteId(id, pageable);
 	}
 
-	public Page<Fattura> findByStatoId(Long id, Pageable pageable) {
-		return fatturaRepository.findByStatoId(id, pageable);
+	public Page<Fattura> findByStato(String nome, Pageable pageable) {
+		return fatturaRepository.findByStatoNomeContainingIgnoreCase(nome, pageable);
 	}
 
 	public Page<Fattura> findByData(Date data, Pageable pageable) {
@@ -49,10 +53,12 @@ public class FatturaService {
 
 	public Fattura update(Fattura fattura, Long id) {
 		Optional<Fattura> fatturaResult = fatturaRepository.findById(id);
-		if (fatturaResult.isPresent()) {
+		Optional<Cliente> clienteResult = clienteRepository.findById(fattura.getCliente().getId());
+		if (fatturaResult.isPresent()&clienteResult.isPresent()) {
+			Cliente clienteUpdate =clienteResult.get();
 			Fattura fatturaUpdate = fatturaResult.get();
 			fatturaUpdate.setAnno(fattura.getAnno());
-			fatturaUpdate.setCliente(fattura.getCliente());
+			fatturaUpdate.setCliente(clienteUpdate);
 			fatturaUpdate.setData(fattura.getData());
 			fatturaUpdate.setImporto(fattura.getImporto());
 			fatturaUpdate.setNumero(fattura.getNumero());

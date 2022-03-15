@@ -5,11 +5,11 @@ AN,Ancona,Marche
 AO,Aosta,Valle d'Aosta
 AQ,L'Aquila,Abruzzo
 AR,Arezzo,Toscana
-AP,Ascoli-Piceno,Marche
+AP,Ascoli Piceno,Marche
 AT,Asti,Piemonte
 AV,Avellino,Campania
 BA,Bari,Puglia
-BT,Barletta-Andria-Trani,Puglia
+BT,Barletta Andria Trani,Puglia
 BL,Belluno,Veneto
 BN,Benevento,Campania
 BG,Bergamo,Lombardia
@@ -36,14 +36,14 @@ FM,Fermo,Marche
 FE,Ferrara,Emilia Romagna
 FI,Firenze,Toscana
 FG,Foggia,Puglia
-FC,Forli-Cesena,Emilia Romagna
+FC,Forli Cesena,Emilia Romagna
 FR,Frosinone,Lazio
 GE,Genova,Liguria
 GO,Gorizia,Friuli Venezia Giulia
 GR,Grosseto,Toscana
 IM,Imperia,Liguria
 IS,Isernia,Molise
-SP,La-Spezia,Liguria
+SP,La Spezia,Liguria
 LT,Latina,Lazio
 LE,Lecce,Puglia
 LC,Lecco,Lombardia
@@ -52,13 +52,13 @@ LO,Lodi,Lombardia
 LU,Lucca,Toscana
 MC,Macerata,Marche
 MN,Mantova,Lombardia
-MS,Massa-Carrara,Toscana
+MS,Massa Carrara,Toscana
 MT,Matera,Basilicata
 VS,Medio Campidano,Sardegna
 ME,Messina,Sicilia
 MI,Milano,Lombardia
 MO,Modena,Emilia Romagna
-MB,Monza-Brianza,Lombardia
+MB,Monza Brianza,Lombardia
 NA,Napoli,Campania
 NO,Novara,Piemonte
 NU,Nuoro,Sardegna
@@ -70,7 +70,7 @@ PA,Palermo,Sicilia
 PR,Parma,Emilia Romagna
 PV,Pavia,Lombardia
 PG,Perugia,Umbria
-PU,Pesaro-Urbino,Marche
+PU,Pesaro Urbino,Marche
 PE,Pescara,Abruzzo
 PC,Piacenza,Emilia Romagna
 PI,Pisa,Toscana
@@ -80,8 +80,8 @@ PZ,Potenza,Basilicata
 PO,Prato,Toscana
 RG,Ragusa,Sicilia
 RA,Ravenna,Emilia Romagna
-RC,Reggio-Calabria,Calabria
-RE,Reggio-Emilia,Emilia Romagna
+RC,Reggio Calabria,Calabria
+RE,Reggio Emilia,Emilia Romagna
 RI,Rieti,Lazio
 RN,Rimini,Emilia Romagna
 Roma,Roma,Lazio
@@ -106,6 +106,6 @@ VE,Venezia,Veneto
 VB,Verbania,Piemonte
 VC,Vercelli,Piemonte
 VR,Verona,Veneto
-VV,Vibo-Valentia,Calabria
+VV,Vibo Valentia,Calabria
 VI,Vicenza,Veneto
 VT,Viterbo,Lazio

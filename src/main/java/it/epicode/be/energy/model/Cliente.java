@@ -10,6 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import lombok.Data;
 
 @Entity
@@ -38,6 +41,7 @@ public class Cliente {
 	@ManyToOne
 	private Indirizzo sedeOperativa;
 	@OneToMany(mappedBy = "cliente")
+	 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 	private List<Fattura> fatture;
 
 
