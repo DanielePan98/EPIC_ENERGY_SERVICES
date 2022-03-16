@@ -27,8 +27,8 @@ public class FatturaService {
 	@Autowired
 	StatoRepository statoRepository;
 
-	public Page<Fattura> findByClienteId(Long id, Pageable pageable) {
-		return fatturaRepository.findByClienteId(id, pageable);
+	public Page<Fattura> findByClienteRagioneSociale(String nome, Pageable pageable) {
+		return fatturaRepository.findByClienteRagioneSocialeContainingIgnoreCase(nome, pageable);
 	}
 
 	public Page<Fattura> findByStato(String nome, Pageable pageable) {

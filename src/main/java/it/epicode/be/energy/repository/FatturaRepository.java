@@ -12,7 +12,7 @@ import it.epicode.be.energy.model.Fattura;
 
 public interface FatturaRepository extends JpaRepository<Fattura, Long> {
 
-	Page<Fattura> findByClienteId(Long id, Pageable pageable);
+	Page<Fattura> findByClienteRagioneSocialeContainingIgnoreCase(String nome, Pageable pageable);
 
 	Page<Fattura> findByStatoNomeContainingIgnoreCase(String nome, Pageable pageable);
 

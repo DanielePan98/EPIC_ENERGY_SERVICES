@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -52,9 +53,9 @@ public class FatturaController {
 		}
 	}
 
-	@GetMapping(path = "/fattura/filtra/cliente/{id}")
-	public ResponseEntity<Page<Fattura>> findByClienteId(@PathVariable Long id, Pageable pageable) {
-		Page<Fattura> findAll = fatturaService.findByClienteId(id, pageable);
+	@GetMapping(path = "/fattura/filtra/cliente/{nome}")
+	public ResponseEntity<Page<Fattura>> findByClienteId(@PathVariable String nome, Pageable pageable) {
+		Page<Fattura> findAll = fatturaService.findByClienteRagioneSociale(nome, pageable);
 		if (!findAll.isEmpty()) {
 			return new ResponseEntity<>(findAll, HttpStatus.OK);
 		} else {
@@ -73,8 +74,7 @@ public class FatturaController {
 	}
 
 	@GetMapping(path = "/fattura/filtra/data/{data}")
-	public ResponseEntity<Page<Fattura>> findByData(@PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") Date data,
-			Pageable pageable) {
+	public ResponseEntity<Page<Fattura>> findByData(@PathVariable("data") @DateTimeFormat(iso = ISO.DATE) Date data,Pageable pageable) {
 		Page<Fattura> findAll = fatturaService.findByData(data, pageable);
 		if (!findAll.isEmpty()) {
 			return new ResponseEntity<>(findAll, HttpStatus.OK);
@@ -94,15 +94,16 @@ public class FatturaController {
 	}
 
 	@GetMapping(path = "/fattura/filtra/importo/{importo1}/{importo2}")
-	public ResponseEntity<Page<Fattura>> findByDataInserimento(@PathVariable BigDecimal importo1,@PathVariable BigDecimal importo2, Pageable pageable) {
-		Page<Fattura> find = fatturaService.findByImportoBetween(importo1,importo2, pageable);
+	public ResponseEntity<Page<Fattura>> findByDataInserimento(@PathVariable BigDecimal importo1,
+			@PathVariable BigDecimal importo2, Pageable pageable) {
+		Page<Fattura> find = fatturaService.findByImportoBetween(importo1, importo2, pageable);
 		if (find.hasContent()) {
 			return new ResponseEntity<>(find, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
 		}
 	}
-	
+
 	@PostMapping(path = "/fattura/aggiungi")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<Fattura> save(@RequestBody Fattura fattura) {

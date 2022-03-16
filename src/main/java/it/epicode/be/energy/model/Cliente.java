@@ -36,9 +36,9 @@ public class Cliente {
 	private Long telefonoContatto;
 	@ManyToOne
 	private Tipo tipo;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.REMOVE)
 	private Indirizzo sedeLegale;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.REMOVE)
 	private Indirizzo sedeOperativa;
 	@OneToMany(mappedBy = "cliente", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties({ "cliente" })
