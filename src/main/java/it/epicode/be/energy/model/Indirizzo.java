@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
@@ -28,10 +29,10 @@ public class Indirizzo {
 	@JsonIgnoreProperties({ "provincia", "indirizzi" })
 	private Comune comune;
 	@OneToMany(mappedBy = "sedeLegale")
-	@JsonIgnoreProperties({ "sedeLegale", "sedeOperativa", "fatture" })
+	@JsonIgnore
 	private List<Cliente> clientiSedeLegale;
 	@OneToMany(mappedBy = "sedeOperativa")
-	@JsonIgnoreProperties({ "sedeLegale", "sedeOperativa", "fatture" })
+	@JsonIgnore
 	private List<Cliente> clientiSedeOperativa;
 
 }
