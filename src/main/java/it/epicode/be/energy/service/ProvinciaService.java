@@ -12,18 +12,18 @@ import it.epicode.be.energy.repository.ProvinciaRepository;
 
 @Service
 public class ProvinciaService {
-	
+
 	@Autowired
 	ProvinciaRepository provinciaRepository;
-	
+
 	public Optional<Provincia> findByNome(String nome) {
 		return provinciaRepository.findByNomeIgnoreCase(nome);
 	}
-	
+
 	public Optional<Provincia> findById(Long id) {
 		return provinciaRepository.findById(id);
 	}
-	
+
 	public Page<Provincia> findAll(Pageable pageable) {
 		return provinciaRepository.findAll(pageable);
 	}

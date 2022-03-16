@@ -3,6 +3,7 @@ package it.epicode.be.energy.model;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,15 +11,14 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
 
 @Entity
 @Data
 public class Cliente {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -40,9 +40,8 @@ public class Cliente {
 	private Indirizzo sedeLegale;
 	@ManyToOne
 	private Indirizzo sedeOperativa;
-	@OneToMany(mappedBy = "cliente")
-	 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+	@OneToMany(mappedBy = "cliente", cascade = CascadeType.REMOVE)
+	@JsonIgnoreProperties({ "cliente" })
 	private List<Fattura> fatture;
-
 
 }

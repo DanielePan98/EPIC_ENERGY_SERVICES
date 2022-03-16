@@ -62,7 +62,7 @@ public class ClienteController {
 
 	@GetMapping(path = "/cliente/ordinaPerProvinciaSedeLegale")
 	public ResponseEntity<Page<Cliente>> findAllProvinciaSedeLegale(Pageable pageable) {
-		Page<Cliente> findAll = clienteService.findAllByOrderBySedeLegaleComuneProvinciaNome(pageable);
+		Page<Cliente> findAll = clienteService.findAllByOrderBySedeLegaleComuneNomeProvincia(pageable);
 		if (!findAll.isEmpty()) {
 			return new ResponseEntity<>(findAll, HttpStatus.OK);
 		} else {

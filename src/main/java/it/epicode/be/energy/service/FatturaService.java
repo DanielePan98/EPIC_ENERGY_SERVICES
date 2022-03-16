@@ -12,8 +12,10 @@ import org.springframework.stereotype.Service;
 import it.epicode.be.energy.exception.EnergyException;
 import it.epicode.be.energy.model.Cliente;
 import it.epicode.be.energy.model.Fattura;
+import it.epicode.be.energy.model.Stato;
 import it.epicode.be.energy.repository.ClienteRepository;
 import it.epicode.be.energy.repository.FatturaRepository;
+import it.epicode.be.energy.repository.StatoRepository;
 
 @Service
 public class FatturaService {
@@ -22,6 +24,8 @@ public class FatturaService {
 	FatturaRepository fatturaRepository;
 	@Autowired
 	ClienteRepository clienteRepository;
+	@Autowired
+	StatoRepository statoRepository;
 
 	public Page<Fattura> findByClienteId(Long id, Pageable pageable) {
 		return fatturaRepository.findByClienteId(id, pageable);
@@ -54,15 +58,24 @@ public class FatturaService {
 	public Fattura update(Fattura fattura, Long id) {
 		Optional<Fattura> fatturaResult = fatturaRepository.findById(id);
 		Optional<Cliente> clienteResult = clienteRepository.findById(fattura.getCliente().getId());
-		if (fatturaResult.isPresent()&clienteResult.isPresent()) {
-			Cliente clienteUpdate =clienteResult.get();
+		Optional<Stato> statoResult = statoRepository.findById(fattura.getStato().getId());
+		Stato statoUpdate = null;
+		Cliente clienteUpdate = null;
+		if (fatturaResult.isPresent()) {
+			if (statoResult.isPresent()) {
+				statoUpdate = statoResult.get();
+			}
+			if (clienteResult.isPresent()) {
+				clienteUpdate = clienteResult.get();
+			}
+			clienteUpdate = clienteResult.get();
 			Fattura fatturaUpdate = fatturaResult.get();
 			fatturaUpdate.setAnno(fattura.getAnno());
 			fatturaUpdate.setCliente(clienteUpdate);
 			fatturaUpdate.setData(fattura.getData());
 			fatturaUpdate.setImporto(fattura.getImporto());
 			fatturaUpdate.setNumero(fattura.getNumero());
-			fatturaUpdate.setStato(fattura.getStato());
+			fatturaUpdate.setStato(statoUpdate);
 			return fatturaRepository.save(fatturaUpdate);
 
 		} else {
@@ -74,8 +87,12 @@ public class FatturaService {
 		return fatturaRepository.save(fattura);
 	}
 
-	public void delete(Long id) {
-		fatturaRepository.deleteById(id);
+	public void deleteById(Long id) {
+		if (fatturaRepository.existsById(id) == true) {
+			fatturaRepository.deleteById(id);
+		} else {
+			throw new EnergyException("Fattura non esistente!");
+		}
 	}
 
 }

@@ -19,24 +19,22 @@ import lombok.Data;
 @Entity
 @Table(name = "user_spring")
 public class User {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	@Column(unique = true,nullable=false)
+	@Column(unique = true, nullable = false)
 	private String userName;
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private String password;
-	@Column(unique = true,nullable=false)
+	@Column(unique = true, nullable = false)
 	private String email;
 	private String nome;
 	private String cognome;
 	private boolean isActive;
-	
+
 	@ManyToMany
-	@JoinTable(name = "user_role",
-	joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-	inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
 	private Set<Role> roles = new HashSet<>();
 
 }

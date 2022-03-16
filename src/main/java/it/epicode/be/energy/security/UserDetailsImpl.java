@@ -26,21 +26,19 @@ public class UserDetailsImpl implements UserDetails {
 	private boolean accountNonLocked;
 	private boolean accountNonExpired;
 	private boolean credentialsNonExpired;
-	//private boolean isActive;
-	//private List<GrantedAuthority> authorities;
-	
-	private Collection<? extends GrantedAuthority> authorities;
-	
-	
+	// private boolean isActive;
+	// private List<GrantedAuthority> authorities;
 
-	/*public UserDetailsImpl(User user) {
-		this.userName = user.getUserName();
-		this.password = user.getPassword();
-		this.isActive = user.isActive();
-		this.authorities = Arrays.stream(user.getRoles().split(",")).map(SimpleGrantedAuthority::new)
-				.collect(Collectors.toList());
-	}*/
-	
+	private Collection<? extends GrantedAuthority> authorities;
+
+	/*
+	 * public UserDetailsImpl(User user) { this.userName = user.getUserName();
+	 * this.password = user.getPassword(); this.isActive = user.isActive();
+	 * this.authorities =
+	 * Arrays.stream(user.getRoles().split(",")).map(SimpleGrantedAuthority::new)
+	 * .collect(Collectors.toList()); }
+	 */
+
 	public UserDetailsImpl(Integer id, String userName, String email, String password,
 			Collection<? extends GrantedAuthority> authorities) {
 		this.id = id;
@@ -52,15 +50,15 @@ public class UserDetailsImpl implements UserDetails {
 		this.credentialsNonExpired = true;
 		this.isEnabled = true;
 		this.authorities = authorities;
-		
+
 	}
-	
+
 	public static UserDetailsImpl build(User user) {
 		List<GrantedAuthority> authorities = user.getRoles().stream()
 				.map(role -> new SimpleGrantedAuthority(role.getRoleName().name())).collect(Collectors.toList());
 		return new UserDetailsImpl(user.getId(), user.getUserName(), user.getEmail(), user.getPassword(), authorities);
 	}
-	
+
 	@Override
 	public String getUsername() {
 		return userName;

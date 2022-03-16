@@ -121,7 +121,7 @@ public class FatturaController {
 	@DeleteMapping(path = "/fattura/elimina/{id}")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<String> delete(@PathVariable Long id) {
-		fatturaService.delete(id);
+		fatturaService.deleteById(id);
 		return new ResponseEntity<>("Fattura eliminata!", HttpStatus.OK);
 
 	}

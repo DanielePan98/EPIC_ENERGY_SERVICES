@@ -10,7 +10,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -30,7 +29,7 @@ public class Comune {
 	private String nomeComune;
 	private String nomeProvincia;
 	@ManyToOne
-	@JsonIgnoreProperties({"regione","sigla","comuni"})
+	@JsonIgnoreProperties({ "regione", "sigla", "comuni" })
 	private Provincia provincia;
 	@OneToMany(mappedBy = "comune")
 	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")

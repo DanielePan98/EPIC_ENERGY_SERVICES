@@ -36,9 +36,9 @@ public class IndirizzoService {
 	public Indirizzo update(Indirizzo indirizzo, Long id) {
 		Optional<Indirizzo> indirizzoResult = indirizzoRepository.findById(id);
 		Optional<Comune> comuneResult = comuneRepository.findById(indirizzo.getComune().getId());
-		if (indirizzoResult.isPresent()&comuneResult.isPresent()) {
+		if (indirizzoResult.isPresent() & comuneResult.isPresent()) {
 			Indirizzo indirizzoUpdate = indirizzoResult.get();
-			Comune comuneUpdate=comuneResult.get();
+			Comune comuneUpdate = comuneResult.get();
 			indirizzoUpdate.setCap(indirizzo.getCap());
 			indirizzoUpdate.setCivico(indirizzo.getCivico());
 			indirizzoUpdate.setVia(indirizzo.getVia());

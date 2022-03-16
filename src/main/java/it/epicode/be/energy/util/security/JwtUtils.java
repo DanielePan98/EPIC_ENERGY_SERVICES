@@ -11,35 +11,33 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import it.epicode.be.energy.security.UserDetailsImpl;
 
-
 @Component
 public class JwtUtils {
 	private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
-	
+
 	@Value("${jwt.secret}")
 	private String jwtSecret;
-	
+
 	@Value("${jwt.expirationms}")
 	private Long jwtExpirationMs;
-	
+
 	public String generateJwtToken(Authentication authentication) {
 		UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
 		Date now = new Date();
 		Date exp = new Date((now).getTime() + jwtExpirationMs);
-		//userPrincipal.setExpirationTime(exp);
-		return Jwts.builder().setSubject((userPrincipal.getUsername())).setIssuedAt(now)
-				.setExpiration(exp)
+		// userPrincipal.setExpirationTime(exp);
+		return Jwts.builder().setSubject((userPrincipal.getUsername())).setIssuedAt(now).setExpiration(exp)
 				.signWith(SignatureAlgorithm.HS512, jwtSecret).compact();
 	}
-	
+
 	public String getUserNameFromJwtToken(String token) {
 		return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
 	}
-	
+
 	public boolean validateJwtToken(String authToken) {
 		try {
 			Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);
-		return true;
+			return true;
 		} catch (Exception e) {
 			logger.error("Invalid JWT signature: {}", e.getMessage());
 		}

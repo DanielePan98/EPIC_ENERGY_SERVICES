@@ -6,8 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import it.epicode.be.energy.model.Comune;
 
-public interface ComuneRepository extends JpaRepository<Comune, Long>{
-	
-	Page<Comune> findByNomeComuneContainingIgnoreCase(String nome,Pageable pageable);
+public interface ComuneRepository extends JpaRepository<Comune, Long> {
+
+	Page<Comune> findByNomeComuneContainingIgnoreCase(String nome, Pageable pageable);
 
 }

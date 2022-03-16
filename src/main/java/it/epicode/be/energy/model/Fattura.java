@@ -9,12 +9,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.Data;
 
 @Entity
 @Data
 public class Fattura {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -25,6 +27,7 @@ public class Fattura {
 	@ManyToOne
 	private Stato stato;
 	@ManyToOne
+	@JsonIgnoreProperties({ "fatture" })
 	private Cliente cliente;
 
 }

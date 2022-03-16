@@ -1,6 +1,8 @@
 package it.epicode.be.energy.service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,13 +12,25 @@ import org.springframework.stereotype.Service;
 
 import it.epicode.be.energy.exception.EnergyException;
 import it.epicode.be.energy.model.Cliente;
+import it.epicode.be.energy.model.Fattura;
+import it.epicode.be.energy.model.Indirizzo;
+import it.epicode.be.energy.model.Tipo;
 import it.epicode.be.energy.repository.ClienteRepository;
+import it.epicode.be.energy.repository.FatturaRepository;
+import it.epicode.be.energy.repository.IndirizzoRepository;
+import it.epicode.be.energy.repository.TipoRepository;
 
 @Service
 public class ClienteService {
 
 	@Autowired
 	ClienteRepository clienteRepository;
+	@Autowired
+	IndirizzoRepository indirizzoRepository;
+	@Autowired
+	FatturaRepository fatturaRepository;
+	@Autowired
+	TipoRepository tipoRepository;
 
 // Tutti i metodi findAll riguardanti l'ordine
 
@@ -24,8 +38,8 @@ public class ClienteService {
 		return clienteRepository.findAll(pageable);
 	}
 
-	public Page<Cliente> findAllByOrderBySedeLegaleComuneProvinciaNome(Pageable pageable) {
-		return clienteRepository.findAllByOrderBySedeLegaleComuneProvinciaNome(pageable);
+	public Page<Cliente> findAllByOrderBySedeLegaleComuneNomeProvincia(Pageable pageable) {
+		return clienteRepository.findAllByOrderBySedeLegale_Comune_NomeProvincia(pageable);
 	}
 
 	public Page<Cliente> findAllByOrderByFatturatoAnnuale(Pageable pageable) {
@@ -42,7 +56,7 @@ public class ClienteService {
 
 //Tutti i metodi findBy riguardanti il filtro
 
-	public Page<Cliente> findByFatturatoAnnuale(Long fatturato1,Long fatturato2, Pageable pageable) {
+	public Page<Cliente> findByFatturatoAnnuale(Long fatturato1, Long fatturato2, Pageable pageable) {
 		return clienteRepository.findByFatturatoAnnualeBetween(fatturato1, fatturato2, pageable);
 	}
 
@@ -66,7 +80,37 @@ public class ClienteService {
 
 	public Cliente update(Cliente cliente, Long id) {
 		Optional<Cliente> clienteResult = clienteRepository.findById(id);
+		Optional<Tipo> tipoResult = tipoRepository.findById(cliente.getTipo().getId());
+		Optional<Indirizzo> indirizzoLegale = indirizzoRepository.findById(cliente.getSedeLegale().getId());
+		Optional<Indirizzo> indirizzoOperativo = indirizzoRepository.findById(cliente.getSedeOperativa().getId());
+		Optional<Fattura> fatturaResult = null;
+		List<Fattura> fattureResult = null;
+		List<Fattura> fattureUpdate = new ArrayList<>();
+		Fattura fatturaUpdate = null;
+		Tipo tipoUpdate = null;
+		Indirizzo legale = null;
+		Indirizzo operativo = null;
 		if (clienteResult.isPresent()) {
+			fattureResult = cliente.getFatture();
+			if (fattureResult != null) {
+				for (Fattura fattura : fattureResult) {
+					fatturaResult = fatturaRepository.findById(fattura.getId());
+					fatturaUpdate = fatturaResult.get();
+					fattureUpdate.add(fatturaUpdate);
+				}
+			}
+			if (tipoResult != null) {
+				tipoUpdate = tipoResult.get();
+			}
+
+			if (indirizzoLegale != null) {
+				legale = indirizzoLegale.get();
+			}
+
+			if (indirizzoOperativo != null) {
+				operativo = indirizzoOperativo.get();
+			}
+
 			Cliente clienteUpdate = clienteResult.get();
 			clienteUpdate.setCognomeContatto(cliente.getCognomeContatto());
 			clienteUpdate.setDataInserimento(cliente.getDataInserimento());
@@ -74,23 +118,22 @@ public class ClienteService {
 			clienteUpdate.setEmail(cliente.getEmail());
 			clienteUpdate.setEmailContatto(cliente.getEmailContatto());
 			clienteUpdate.setFatturatoAnnuale(cliente.getFatturatoAnnuale());
-			clienteUpdate.setFatture(cliente.getFatture());
+			clienteUpdate.setFatture(fattureUpdate);
 			clienteUpdate.setNomeContatto(cliente.getNomeContatto());
 			clienteUpdate.setPartitaIva(cliente.getPartitaIva());
 			clienteUpdate.setPec(cliente.getPec());
 			clienteUpdate.setRagioneSociale(cliente.getRagioneSociale());
-			clienteUpdate.setSedeLegale(cliente.getSedeLegale());
-			clienteUpdate.setSedeOperativa(cliente.getSedeOperativa());
+			clienteUpdate.setSedeLegale(legale);
+			clienteUpdate.setSedeOperativa(operativo);
 			clienteUpdate.setTelefono(cliente.getTelefono());
 			clienteUpdate.setTelefonoContatto(cliente.getTelefonoContatto());
-			clienteUpdate.setTipo(cliente.getTipo());
+			clienteUpdate.setTipo(tipoUpdate);
 			return clienteRepository.save(clienteUpdate);
-		}
-		else {
+		} else {
 			throw new EnergyException("Cliente non aggiornato!");
 		}
 	}
-	
+
 	public void delete(Long id) {
 		clienteRepository.deleteById(id);
 	}

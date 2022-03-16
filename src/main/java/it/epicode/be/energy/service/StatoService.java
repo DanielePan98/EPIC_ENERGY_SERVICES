@@ -11,7 +11,6 @@ import it.epicode.be.energy.exception.EnergyException;
 import it.epicode.be.energy.model.Stato;
 import it.epicode.be.energy.repository.StatoRepository;
 
-
 @Service
 public class StatoService {
 
