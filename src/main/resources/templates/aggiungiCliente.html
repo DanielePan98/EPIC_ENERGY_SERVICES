@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Aggiungi cliente</title>
+</head>
+<body>
+	<header>
+
+		<h1>Epic Energy Services</h1>
+		<h2>Aggiungi un cliente</h2>
+
+	</header>
+
+	<form action="#" method="post" th:action="@{/web/aggiungiCliente}"
+		th:object="${cliente}">
+		<table>
+			<thead>
+				<tr>
+
+
+					<th>Ragione Sociale</th>
+					<th>PartitaIva</th>
+					<th>Email</th>
+<!-- 					<th>Data Inserimento</th> -->
+<!-- 					<th>Data Ultimo Contatto</th> -->
+					<th>Fatturato Annuale</th>
+					<th>Pec</th>
+					<th>Telefono</th>
+					<th>Email Contatto</th>
+					<th>Nome Contatto</th>
+					<th>Cognome Contatto</th>
+					<th>Telefono Contatto</th>
+
+
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+
+					<td><input type="text" th:field="*{ragioneSociale}"
+						required="required"></td>
+					<td><input type="text" th:field="*{partitaIva}"
+						required="required"></td>
+					<td><input type="email" th:field="*{email}" id="citta"
+						required="required"></td>
+<!-- 					<td><input type="date" pattern="yyyy-MM-dd" -->
+<!-- 						th:field="*{dataInserimento}" required="required"></td> -->
+<!-- 					<td><input type="date" pattern="yyyy-MM-dd" -->
+<!-- 						th:field="*{dataUltimoContatto}" required="required"></td> -->
+					<td><input type="text" th:field="*{fatturatoAnnuale}"
+						required="required"></td>
+					<td><input type="email" th:field="*{pec}" required="required"></td>
+					<td><input type="tel" th:field="*{telefono}"
+						required="required"></td>
+					<td><input type="email" th:field="*{emailContatto}"
+						required="required"></td>
+					<td><input type="text" th:field="*{nomeContatto}"
+						required="required"></td>
+					<td><input type="text" th:field="*{cognomeContatto}"
+						required="required"></td>
+					<td><input type="tel" th:field="*{telefonoContatto}"
+						required="required"></td>
+					<!-- 					<td><input type="text" th:field="*{tipo}"  required="required"></td> -->
+					<!-- 					<td><input type="text" th:field="*{sedeLegale}"  required="required"></td> -->
+					<!-- 					<td><input type="text" th:field="*{sedeOperativa}"  required="required"></td> -->
+
+
+
+
+
+					<td></select></td>
+
+					<td><input type="submit" value="Inserisci Cliente"></td>
+				</tr>
+			</tbody>
+
+		</table>
+		<p>
+			<input type="submit" value="Aggiungi" /> <input type="reset"
+				value="Reset">
+		</p>
+	</form>
+
+	<a href="http://localhost:8080">Torna alla home</a>
+
+	<footer>
+		<p>Powered by Daniele Pan &copy; 2022</p>
+	</footer>
+
+</body>
+</html>

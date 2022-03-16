@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Lista clienti</title>
+</head>
+<body>
+	<header>
+		<h1>Epic Energy Services</h1>
+		<h2>Elenco clienti</h2>
+
+	</header>
+	<table>
+
+		<thead>
+
+			<tr>
+
+				<th>Ragione Sociale</th>
+				<th>PartitaIva</th>
+				<th>Email</th>
+				<th>Data Inserimento</th>
+				<th>Data Ultimo Contatto</th>
+				<th>Fatturato Annuale</th>
+				<th>Pec</th>
+				<th>Telefono</th>
+				<th>Email Contatto</th>
+				<th>Nome Contatto</th>
+				<th>Cognome Contatto</th>
+				<th>Telefono Contatto</th>
+				<!-- 				<th>Tipo</th> -->
+				<!-- 				<th>Sede Legale</th> -->
+				<!-- 				<th>Sede Operativa</th> -->
+
+
+
+
+			</tr>
+
+		</thead>
+		<div th:each="s : ${cliente}">
+			<tbody>
+				<tr>
+
+					<td th:text="${s.ragioneSociale}"></td>
+					<td th:text="${s.partitaIva}"></td>
+					<td th:text="${s.email}"></td>
+					<td th:text="${s.dataInserimento}"></td>
+					<td th:text="${s.dataUltimoContatto}"></td>
+					<td th:text="${s.fatturatoAnnuale}"></td>
+					<td th:text="${s.pec}"></td>
+					<td th:text="${s.telefono}"></td>
+					<td th:text="${s.emailContatto}"></td>
+					<td th:text="${s.nomeContatto}"></td>
+					<td th:text="${s.cognomeContatto}"></td>
+					<td th:text="${s.telefonoContatto}"></td>
+					<!-- 				<td th:text="${s.tipo}"></td> -->
+					<!-- 				<td th:text="${s.sedeLegale}"></td> -->
+					<!-- 				<td th:text="${s.sedeOperativa}"></td> -->
+					<td><a
+						th:href="@{/web/mostraFormAggiorna/{id}(id=${s.id})}">Aggiorna</a></td>
+					<td><a th:href="@{/web/eliminaCliente/{id}(id=${s.id})}"
+						onclick="return confirm('Sei sicuro di voler eliminare questo elemento?')">Elimina</a></td>
+
+				</tr>
+			</tbody>
+		</div>
+	</table>
+
+	<a href="/web/mostraFormAggiungi">Aggiungi Cliente</a>
+	<br>
+
+
+
+	<footer>
+		<p>Powered by Daniele Pan &copy; 2022</p>
+	</footer>
+
+</body>
+</html>

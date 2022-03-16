@@ -34,6 +34,10 @@ public class ClienteService {
 
 // Tutti i metodi findAll riguardanti l'ordine
 
+	public Optional<Cliente> findById(Long id) {
+		return clienteRepository.findById(id);
+	}
+
 	public Page<Cliente> findAll(Pageable pageable) {
 		return clienteRepository.findAll(pageable);
 	}
@@ -128,6 +132,32 @@ public class ClienteService {
 			clienteUpdate.setTelefono(cliente.getTelefono());
 			clienteUpdate.setTelefonoContatto(cliente.getTelefonoContatto());
 			clienteUpdate.setTipo(tipoUpdate);
+			return clienteRepository.save(clienteUpdate);
+		} else {
+			throw new EnergyException("Cliente non aggiornato!");
+		}
+	}
+
+	public Cliente updateWeb(Cliente cliente, Long id) {
+		Optional<Cliente> clienteResult = clienteRepository.findById(id);
+		if (clienteResult.isPresent()) {
+			Cliente clienteUpdate = clienteResult.get();
+			clienteUpdate.setCognomeContatto(cliente.getCognomeContatto());
+//			clienteUpdate.setDataInserimento(cliente.getDataInserimento());
+//			clienteUpdate.setDataUltimoContatto(cliente.getDataUltimoContatto());
+			clienteUpdate.setEmail(cliente.getEmail());
+			clienteUpdate.setEmailContatto(cliente.getEmailContatto());
+			clienteUpdate.setFatturatoAnnuale(cliente.getFatturatoAnnuale());
+//			clienteUpdate.setFatture(cliente.getFatture());
+			clienteUpdate.setNomeContatto(cliente.getNomeContatto());
+			clienteUpdate.setPartitaIva(cliente.getPartitaIva());
+			clienteUpdate.setPec(cliente.getPec());
+			clienteUpdate.setRagioneSociale(cliente.getRagioneSociale());
+//			clienteUpdate.setSedeLegale(cliente.getSedeLegale());
+//			clienteUpdate.setSedeOperativa(cliente.getSedeOperativa());
+			clienteUpdate.setTelefono(cliente.getTelefono());
+			clienteUpdate.setTelefonoContatto(cliente.getTelefonoContatto());
+//			clienteUpdate.setTipo(cliente.getTipo());
 			return clienteRepository.save(clienteUpdate);
 		} else {
 			throw new EnergyException("Cliente non aggiornato!");
