@@ -11,7 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 
@@ -25,7 +27,9 @@ public class Cliente {
 	private String ragioneSociale;
 	private Long partitaIva;
 	private String email;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dataInserimento;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dataUltimoContatto;
 	private Long fatturatoAnnuale;
 	private String pec;
@@ -40,8 +44,8 @@ public class Cliente {
 	private Indirizzo sedeLegale;
 	@ManyToOne(cascade = CascadeType.REMOVE)
 	private Indirizzo sedeOperativa;
-	@OneToMany(mappedBy = "cliente", cascade = {CascadeType.REMOVE, CascadeType.MERGE})
-	@JsonIgnoreProperties({ "cliente" })
+	@OneToMany(mappedBy = "cliente", cascade = CascadeType.REMOVE)
+	@JsonIgnore
 	private List<Fattura> fatture;
 
 }

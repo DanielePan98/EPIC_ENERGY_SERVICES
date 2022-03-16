@@ -143,8 +143,8 @@ public class ClienteService {
 		if (clienteResult.isPresent()) {
 			Cliente clienteUpdate = clienteResult.get();
 			clienteUpdate.setCognomeContatto(cliente.getCognomeContatto());
-//			clienteUpdate.setDataInserimento(cliente.getDataInserimento());
-//			clienteUpdate.setDataUltimoContatto(cliente.getDataUltimoContatto());
+			clienteUpdate.setDataInserimento(cliente.getDataInserimento());
+		    clienteUpdate.setDataUltimoContatto(cliente.getDataUltimoContatto());
 			clienteUpdate.setEmail(cliente.getEmail());
 			clienteUpdate.setEmailContatto(cliente.getEmailContatto());
 			clienteUpdate.setFatturatoAnnuale(cliente.getFatturatoAnnuale());

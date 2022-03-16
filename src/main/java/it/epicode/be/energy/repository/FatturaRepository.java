@@ -24,6 +24,8 @@ public interface FatturaRepository extends JpaRepository<Fattura, Long> {
 
 	List<Fattura> findByIdIn(List<Long> id);
 
+	List<Fattura> findByStatoId(Long id);
+
 	boolean existsById(Long id);
 
 }

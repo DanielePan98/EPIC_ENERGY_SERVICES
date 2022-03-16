@@ -1,5 +1,6 @@
 package it.epicode.be.energy.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import it.epicode.be.energy.exception.EnergyException;
+import it.epicode.be.energy.model.Fattura;
 import it.epicode.be.energy.model.Stato;
+import it.epicode.be.energy.repository.FatturaRepository;
 import it.epicode.be.energy.repository.StatoRepository;
 
 @Service
@@ -16,6 +19,8 @@ public class StatoService {
 
 	@Autowired
 	StatoRepository statoRepository;
+	@Autowired
+	FatturaRepository fatturaRepository;
 
 	public Optional<Stato> findById(Long id) {
 		return statoRepository.findById(id);
@@ -44,6 +49,12 @@ public class StatoService {
 	}
 
 	public void delete(Long id) {
+		List<Fattura> fatture=fatturaRepository.findByStatoId(id);
+		if(!fatture.isEmpty()) {
+			for(Fattura fattura:fatture) {
+				fattura.setStato(null);
+			}
+		}
 		statoRepository.deleteById(id);
 	}
 

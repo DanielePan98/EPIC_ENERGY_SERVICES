@@ -2,6 +2,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<link rel="stylesheet" th:href="@{/universita.css}" />
 <title>Aggiungi cliente</title>
 </head>
 <body>
@@ -14,6 +15,9 @@
 
 	<form action="#" method="post" th:action="@{/web/aggiungiCliente}"
 		th:object="${cliente}">
+
+		
+
 		<table>
 			<thead>
 				<tr>
@@ -22,8 +26,8 @@
 					<th>Ragione Sociale</th>
 					<th>PartitaIva</th>
 					<th>Email</th>
-<!-- 					<th>Data Inserimento</th> -->
-<!-- 					<th>Data Ultimo Contatto</th> -->
+					<th>Data Inserimento</th>
+					<th>Data Ultimo Contatto</th>
 					<th>Fatturato Annuale</th>
 					<th>Pec</th>
 					<th>Telefono</th>
@@ -31,6 +35,10 @@
 					<th>Nome Contatto</th>
 					<th>Cognome Contatto</th>
 					<th>Telefono Contatto</th>
+					<th>Tipo</th>
+					<th>Sede Legale</th>
+					<th>Sede Operativa</th>
+
 
 
 				</tr>
@@ -44,10 +52,10 @@
 						required="required"></td>
 					<td><input type="email" th:field="*{email}" id="citta"
 						required="required"></td>
-<!-- 					<td><input type="date" pattern="yyyy-MM-dd" -->
-<!-- 						th:field="*{dataInserimento}" required="required"></td> -->
-<!-- 					<td><input type="date" pattern="yyyy-MM-dd" -->
-<!-- 						th:field="*{dataUltimoContatto}" required="required"></td> -->
+					<td><input type="date" pattern="yyyy-MM-dd"
+						th:field="*{dataInserimento}" required="required"></td>
+					<td><input type="date" pattern="yyyy-MM-dd"
+						th:field="*{dataUltimoContatto}" required="required"></td>
 					<td><input type="text" th:field="*{fatturatoAnnuale}"
 						required="required"></td>
 					<td><input type="email" th:field="*{pec}" required="required"></td>
@@ -61,21 +69,18 @@
 						required="required"></td>
 					<td><input type="tel" th:field="*{telefonoContatto}"
 						required="required"></td>
-					<!-- 					<td><input type="text" th:field="*{tipo}"  required="required"></td> -->
-					<!-- 					<td><input type="text" th:field="*{sedeLegale}"  required="required"></td> -->
-					<!-- 					<td><input type="text" th:field="*{sedeOperativa}"  required="required"></td> -->
+					<td><input type="text" th:field="*{tipo}" required="required"></td>
+					<td><input type="text" th:field="*{sedeLegale}"
+						required="required"></td>
+					<td><input type="text" th:field="*{sedeOperativa}"
+						required="required"></td>
 
-
-
-
-
-					<td></select></td>
-
-					<td><input type="submit" value="Inserisci Cliente"></td>
 				</tr>
 			</tbody>
 
 		</table>
+
+		
 		<p>
 			<input type="submit" value="Aggiungi" /> <input type="reset"
 				value="Reset">

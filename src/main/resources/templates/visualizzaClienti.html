@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
+<link rel="stylesheet" th:href="@{/universita.css}" />
 <title>Lista clienti</title>
 </head>
 <body>
@@ -28,9 +29,11 @@
 				<th>Nome Contatto</th>
 				<th>Cognome Contatto</th>
 				<th>Telefono Contatto</th>
-				<!-- 				<th>Tipo</th> -->
-				<!-- 				<th>Sede Legale</th> -->
-				<!-- 				<th>Sede Operativa</th> -->
+				<th>Tipo</th>
+				<th>Sede Legale</th>
+				<th>Sede Operativa</th>
+				<th>Aggiorna</th>
+				<th>Elimina</th>
 
 
 
@@ -54,11 +57,10 @@
 					<td th:text="${s.nomeContatto}"></td>
 					<td th:text="${s.cognomeContatto}"></td>
 					<td th:text="${s.telefonoContatto}"></td>
-					<!-- 				<td th:text="${s.tipo}"></td> -->
-					<!-- 				<td th:text="${s.sedeLegale}"></td> -->
-					<!-- 				<td th:text="${s.sedeOperativa}"></td> -->
-					<td><a
-						th:href="@{/web/mostraFormAggiorna/{id}(id=${s.id})}">Aggiorna</a></td>
+					<td th:text="${s.tipo.tipo}"></td>
+					<td th:text="${s.sedeLegale.via+' '+s.sedeLegale.civico+' '+s.sedeLegale.cap+' '+s.sedeLegale.localita}"></td>
+					<td th:text="${s.sedeOperativa.via+' '+s.sedeOperativa.civico+' '+s.sedeOperativa.cap+' '+s.sedeOperativa.localita}"></td>
+					<td><a th:href="@{/web/mostraFormAggiorna/{id}(id=${s.id})}">Aggiorna</a></td>
 					<td><a th:href="@{/web/eliminaCliente/{id}(id=${s.id})}"
 						onclick="return confirm('Sei sicuro di voler eliminare questo elemento?')">Elimina</a></td>
 
@@ -67,7 +69,7 @@
 		</div>
 	</table>
 
-	<a href="/web/mostraFormAggiungi">Aggiungi Cliente</a>
+	<a id="aggiungi" href="/web/mostraFormAggiungi">Aggiungi Cliente</a>
 	<br>
 
 
