@@ -23,7 +23,7 @@ import it.epicode.be.energy.model.Cliente;
 import it.epicode.be.energy.service.ClienteService;
 
 @RestController
-@SecurityRequirement(name="bearerAuth")
+@SecurityRequirement(name = "bearerAuth")
 @RequestMapping("/api")
 public class ClienteController {
 
@@ -81,8 +81,9 @@ public class ClienteController {
 	}
 
 	@GetMapping(path = "/cliente/filtrataPerFatturatoAnnuale/{fatturato1}/{fatturato2}")
-	public ResponseEntity<Page<Cliente>> findByFatturatoAnnuale(@PathVariable Long fatturato1,@PathVariable Long fatturato2, Pageable pageable) {
-		Page<Cliente> find = clienteService.findByFatturatoAnnuale(fatturato1,fatturato2, pageable);
+	public ResponseEntity<Page<Cliente>> findByFatturatoAnnuale(@PathVariable Long fatturato1,
+			@PathVariable Long fatturato2, Pageable pageable) {
+		Page<Cliente> find = clienteService.findByFatturatoAnnuale(fatturato1, fatturato2, pageable);
 		if (find.hasContent()) {
 			return new ResponseEntity<>(find, HttpStatus.OK);
 		} else {
@@ -91,7 +92,8 @@ public class ClienteController {
 	}
 
 	@GetMapping(path = "/cliente/filtrataPerDataInserimento/{data}")
-	public ResponseEntity<Page<Cliente>> findByDataInserimento(@PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate data, Pageable pageable) {
+	public ResponseEntity<Page<Cliente>> findByDataInserimento(
+			@PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate data, Pageable pageable) {
 		Page<Cliente> find = clienteService.findByDataInserimento(data, pageable);
 		if (find.hasContent()) {
 			return new ResponseEntity<>(find, HttpStatus.OK);
@@ -101,7 +103,8 @@ public class ClienteController {
 	}
 
 	@GetMapping(path = "/cliente/filtrataPerDataUltimoContatto/{data}")
-	public ResponseEntity<Page<Cliente>> findByDataUltimoContatto(@PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate data, Pageable pageable) {
+	public ResponseEntity<Page<Cliente>> findByDataUltimoContatto(
+			@PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate data, Pageable pageable) {
 		Page<Cliente> find = clienteService.findByDataUltimoContatto(data, pageable);
 		if (find.hasContent()) {
 			return new ResponseEntity<>(find, HttpStatus.OK);
