@@ -8,8 +8,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import it.epicode.be.energy.exception.EnergyException;
+import it.epicode.be.energy.model.Cliente;
 import it.epicode.be.energy.model.Comune;
 import it.epicode.be.energy.model.Indirizzo;
+import it.epicode.be.energy.repository.ClienteRepository;
 import it.epicode.be.energy.repository.ComuneRepository;
 import it.epicode.be.energy.repository.IndirizzoRepository;
 
@@ -20,6 +22,8 @@ public class IndirizzoService {
 	IndirizzoRepository indirizzoRepository;
 	@Autowired
 	ComuneRepository comuneRepository;
+	@Autowired
+	ClienteRepository clienteRepository;
 
 	public Optional<Indirizzo> findById(Long id) {
 		return indirizzoRepository.findById(id);
@@ -54,7 +58,17 @@ public class IndirizzoService {
 	}
 
 	public void delete(Long id) {
-		indirizzoRepository.deleteById(id);
+		Optional<Cliente> cliente =clienteRepository.findBySedeLegaleId(id);
+		Optional<Cliente> cliente2 =clienteRepository.findBySedeOperativaId(id);
+		if(cliente.isPresent()) {
+			Cliente clientedelete =cliente.get();
+			clientedelete.setSedeLegale(null);
+		if(cliente2.isPresent()) {
+			Cliente clientedelete2 = cliente2.get();
+			clientedelete2.setSedeOperativa(null);
+		}
+			indirizzoRepository.deleteById(id);
+		}
 	}
 
 }

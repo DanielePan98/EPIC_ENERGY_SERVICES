@@ -1,6 +1,7 @@
 package it.epicode.be.energy.repository;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -25,5 +26,8 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
 	Page<Cliente> findByDataUltimoContatto(LocalDate data, Pageable pageable);
 
 	Page<Cliente> findByRagioneSocialeContainingIgnoreCase(String nome, Pageable pageable);
+	
+	Optional<Cliente> findBySedeLegaleId(Long id);
+	Optional<Cliente> findBySedeOperativaId(Long id);
 
 }

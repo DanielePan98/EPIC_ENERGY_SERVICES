@@ -40,7 +40,7 @@ public class Cliente {
 	private Indirizzo sedeLegale;
 	@ManyToOne(cascade = CascadeType.REMOVE)
 	private Indirizzo sedeOperativa;
-	@OneToMany(mappedBy = "cliente", cascade = CascadeType.REMOVE)
+	@OneToMany(mappedBy = "cliente", cascade = {CascadeType.REMOVE, CascadeType.MERGE})
 	@JsonIgnoreProperties({ "cliente" })
 	private List<Fattura> fatture;
 
