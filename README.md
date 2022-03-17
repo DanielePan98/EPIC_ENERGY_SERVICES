@@ -3,7 +3,7 @@
 ## Tabella dei contenuti
 
 - [Introduzione e Tecnologie](#Introduzione-e-Tecnologie)
-- [Versions](#Version)
+- [Versione](#Versione)
 - [Requisiti](#Requisiti)
 - [Principali features](#Principali-features)
 - [Testing](#Testing)
@@ -23,7 +23,8 @@ Questa è un'applicazione per gestire i clienti bussiness di un'agenzia nell'amb
 
 ## Introduzione e Tecnologie
 
-Latest stable version: 1.0  
+## Versione
+Latest stable version: 3.0  
 
 ## Requisiti
 Creare nuovi dati attraverso i metodi POST(es.nuove cliente,nuova fattura,nuovo indirizzo)
