@@ -141,7 +141,7 @@ public class ClienteController {
 	@DeleteMapping(path = "/cliente/elimina/{id}")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<String> delete(@PathVariable Long id) {
-		clienteService.delete(id);
+		clienteService.deleteById(id);
 		return new ResponseEntity<>("Cliente eliminato!", HttpStatus.OK);
 
 	}

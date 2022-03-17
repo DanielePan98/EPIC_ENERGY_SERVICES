@@ -26,8 +26,11 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
 	Page<Cliente> findByDataUltimoContatto(LocalDate data, Pageable pageable);
 
 	Page<Cliente> findByRagioneSocialeContainingIgnoreCase(String nome, Pageable pageable);
-	
+
 	Optional<Cliente> findBySedeLegaleId(Long id);
+
 	Optional<Cliente> findBySedeOperativaId(Long id);
+	
+	boolean existsById(Long id);
 
 }

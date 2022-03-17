@@ -25,8 +25,10 @@ import it.epicode.be.energy.model.Indirizzo;
 import it.epicode.be.energy.model.Stato;
 import it.epicode.be.energy.model.Tipo;
 import it.epicode.be.energy.model.TipoEnum;
+import it.epicode.be.energy.repository.ClienteRepository;
 import it.epicode.be.energy.repository.FatturaRepository;
 import it.epicode.be.energy.repository.IndirizzoRepository;
+import it.epicode.be.energy.repository.StatoRepository;
 import it.epicode.be.energy.repository.TipoRepository;
 import lombok.extern.slf4j.Slf4j;
 
@@ -43,6 +45,10 @@ public class FatturaControllerTest {
 	IndirizzoRepository indirizzoRepository;
 	@Autowired
 	TipoRepository tipoRepository;
+	@Autowired
+	ClienteRepository clienteRepository;
+	@Autowired
+	StatoRepository statoRepository;
 	
 	Cliente c1 = new Cliente();
 	Cliente c2 = new Cliente();
@@ -61,6 +67,8 @@ public class FatturaControllerTest {
 		tipo.setTipo(TipoEnum.PA);
 		
 		tipoRepository.save(tipo);
+		statoRepository.save(stato1);
+		statoRepository.save(stato2);
 
 		Indirizzo i1 = new Indirizzo();
 		i1.setCap("00152");
@@ -91,6 +99,8 @@ public class FatturaControllerTest {
 		f2.setImporto(BigDecimal.valueOf(5999.49));
 		f2.setNumero(389);
 		f2.setStato(stato2);
+		
+		fatturaRepository.save(f1);
 
 		List<Fattura> fatture = new ArrayList<>();
 		fatture.add(f2);
@@ -129,6 +139,8 @@ public class FatturaControllerTest {
 		c1.setTelefono(3337869087l);
 		c1.setTelefonoContatto(333713921l);
 		c1.setTipo(tipo);
+		clienteRepository.save(c1);
+		clienteRepository.save(c2);
 
 		log.info("Fine");
 	}
@@ -155,5 +167,24 @@ public class FatturaControllerTest {
 	public void deleteStudentNonAutorizzato() throws Exception {
 		this.mockMvc.perform(delete("/api/fattura/elimina/1")).andExpect(status().isForbidden());
 	}
+	
+	@Test
+	@WithMockUser(username = "admin", password = "admin", roles = "ADMIN")
+	public void fatturaperId() throws Exception {
+		this.mockMvc.perform(get("/api/fattura/id/1")).andExpect(status().isNotFound());
+	}
+	
+	@Test
+	@WithMockUser(username = "admin", password = "admin", roles = "ADMIN")
+	public void listaFatturePerRagioneSociale() throws Exception {
+		this.mockMvc.perform(get("/api/fattura/filtra/cliente/Pippo")).andExpect(status().isNotFound());
+	}
+	
+	@Test
+	@WithMockUser(username = "admin", password = "admin", roles = "ADMIN")
+	public void listaFatturePerData() throws Exception {
+		this.mockMvc.perform(get("/api/fattura/filtra/data/2020-04-04")).andExpect(status().isNotFound());
+	}
+	
 
 }

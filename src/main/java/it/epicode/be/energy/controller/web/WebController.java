@@ -35,7 +35,7 @@ public class WebController {
 	@GetMapping("/eliminaCliente/{id}")
 	public ModelAndView eliminaCliente(@PathVariable Long id, Pageable pageable) {
 		log.info("*** Cancellazione clienti in corso ***");
-		clienteService.delete(id);
+		clienteService.deleteById(id);
 		log.info("*** Cliente cancellato ***");
 		return findAllCliente(pageable);
 	}

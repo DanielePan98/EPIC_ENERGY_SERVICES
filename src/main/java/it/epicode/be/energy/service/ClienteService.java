@@ -164,7 +164,11 @@ public class ClienteService {
 		}
 	}
 
-	public void delete(Long id) {
-		clienteRepository.deleteById(id);
+	public void deleteById(Long id) {
+		if (clienteRepository.existsById(id) == true) {
+			clienteRepository.deleteById(id);
+		} else {
+			throw new EnergyException("Cliente non esistente!");
+		}
 	}
 }

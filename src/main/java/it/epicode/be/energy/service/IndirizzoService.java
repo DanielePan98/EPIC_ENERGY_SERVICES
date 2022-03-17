@@ -58,16 +58,21 @@ public class IndirizzoService {
 	}
 
 	public void delete(Long id) {
-		Optional<Cliente> cliente =clienteRepository.findBySedeLegaleId(id);
-		Optional<Cliente> cliente2 =clienteRepository.findBySedeOperativaId(id);
-		if(cliente.isPresent()) {
-			Cliente clientedelete =cliente.get();
-			clientedelete.setSedeLegale(null);
-		if(cliente2.isPresent()) {
-			Cliente clientedelete2 = cliente2.get();
-			clientedelete2.setSedeOperativa(null);
-		}
+		Optional<Cliente> cliente = clienteRepository.findBySedeLegaleId(id);
+		Optional<Cliente> cliente2 = clienteRepository.findBySedeOperativaId(id);
+		if (indirizzoRepository.existsById(id) == true) {
+			if (cliente.isPresent()) {
+				Cliente clientedelete = cliente.get();
+				clientedelete.setSedeLegale(null);
+			}
+			if (cliente2.isPresent()) {
+				Cliente clientedelete2 = cliente2.get();
+				clientedelete2.setSedeOperativa(null);
+			}
 			indirizzoRepository.deleteById(id);
+
+		} else {
+			throw new EnergyException("Indirizzo non esistente");
 		}
 	}
 

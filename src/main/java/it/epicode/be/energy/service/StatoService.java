@@ -50,12 +50,17 @@ public class StatoService {
 
 	public void delete(Long id) {
 		List<Fattura> fatture=fatturaRepository.findByStatoId(id);
+		if(fatturaRepository.existsById(id)==true) {
 		if(!fatture.isEmpty()) {
 			for(Fattura fattura:fatture) {
 				fattura.setStato(null);
 			}
 		}
 		statoRepository.deleteById(id);
+	}
+		else {
+			throw new EnergyException("Stato fattura non esistente!");
+		}
 	}
 
 }
