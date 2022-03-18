@@ -25,7 +25,7 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
 
 	Page<Cliente> findByDataUltimoContatto(LocalDate data, Pageable pageable);
 
-	Page<Cliente> findByRagioneSocialeContainingIgnoreCase(String nome, Pageable pageable);
+	Page<Cliente> findByRagioneSocialeContainingIgnoreCase(String nome, Pageable pageable);// Containing viene tradotto in "… where x.firstname like ?1 (parameter bound wrapped in %)"
 
 	Optional<Cliente> findBySedeLegaleId(Long id);
 
