@@ -19,7 +19,7 @@ Questa è un'applicazione per gestire i clienti bussiness di un'agenzia nell'amb
 - Visual Studio Code
 - Advanced REST Client
 - Maven
-- Git and Gihub, of course : ) 
+- Git and Github
 
 ## Introduzione e Tecnologie
 
